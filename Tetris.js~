@@ -1,0 +1,93 @@
+var gLoop,
+	c = document.getElementById('c'),
+	ctx = c.getContext('2d');
+	
+var fieldH = 20, fieldW = 20, radius = 12.5;
+width = fieldW * 2 * radius;
+height = fieldH * 2 * radius;
+c.width = width;
+c.height = height;
+
+//Draw functions
+
+var clear = function(cnv){
+	cc = cnv.getContext('2d');
+	cc.fillStyle = '#d0e7f9';
+	cc.clearRect(0, 0, cnv.width, cnv.height);
+	cc.beginPath();
+	cc.rect(0, 0, cnv.width, cnv.height);
+	cc.closePath();
+	cc.fill();
+}
+
+var drawTile = function(x, y, im, cc){
+	var img=new Image();
+	var str = "images/";
+	img.src= str.concat(im);
+	cc.drawImage(img, x - radius, y - radius); 
+}
+
+var draw = function(data,cc){
+	wid = data.length;
+	hei = data[0].length;
+	for (var i = 0; i < wid; i++){
+		for (var j = 0; j < hei - 1; j++){
+			if (data[i][j] != 0){
+				drawTile(i * 2 * radius + radius, j * 2 * radius + radius, images[Math.abs(data[i][j]) - 1],cc);
+			}
+		}
+	}
+};
+
+// Initialization functions
+
+function pauseGame() {
+  if (!gamePaused) {
+    gLoop = clearTimeout(gLoop);
+    gamePaused = true;
+  } else if (gamePaused) {
+    gLoop = setTimeout(GameLoop, 1000 / 4);
+    gamePaused = false;
+  }
+}
+
+var gamePaused = false;
+newGame();
+
+function doKeyDown(e) {
+	if (gamePaused == true) {return;}
+	var i = e.keyCode;
+	//console.log(i);
+	updatePosition(0);
+	if (i == 37){
+		moveFigure([-1, 0]);
+	}
+	if (i == 39){
+		moveFigure([1, 0]);
+	}
+	if (i == 38){
+		rotateFigure();
+	}
+	if (i == 40){
+		dropFigure();
+	}
+	updatePosition(nOfFigure + 1);
+	clear(c);
+	draw(field,ctx);
+}
+
+var GameLoop = function(){
+	clear(c);
+	updateField();
+	draw(field,ctx);
+	clear(cv);
+	updateStats();
+	drawNextFigure();
+
+	gLoop = setTimeout(GameLoop, 1000 / 4);
+}
+
+updatePosition(nOfFigure + 1);
+window.addEventListener( "keydown", doKeyDown, true);
+
+GameLoop();
