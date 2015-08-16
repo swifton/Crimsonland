@@ -1,30 +1,29 @@
 <html>  
   <head>  
     <title>Crimsonland</title>  
-	<!--<link rel="stylesheet" href="Tetris.css" />-->
-  <style>  
-  body {  
-    margin:0px;  
-    padding:0px;  
-    text-align:center;  
-  }  
-  
-  canvas{  
-    outline:0;  
-    border:1px solid #000;  
-    margin-left: auto;  
-    margin-right: auto;  
-  }  
-  </style>  
   </head>  
+
   <body> 
-	<div id="page-wrap" class="clearfix">  
-		<div class="content">
-			<canvas id='c'></canvas>
-		</div>
-	</div>
-	<script src="movable.js"></script> 
-	<script src="controls.js"></script> 
-	<script src="crimsonland.js"></script>   
+
+    <canvas id='canvas'></canvas>
+ 
+    <!-- Platform layer -->
+    <script src="../prototype/Canvas.js"></script>
+    <script src="../prototype/Input.js"></script>
+    <script src="../prototype/FileSaver.js"></script>
+    <script src="../prototype/Files.js"></script>
+
+    <!-- Some useful functions -->
+    <script src="../prototype/Utils.js"></script>
+    <script src="../prototype/Figures.js"></script>
+
+    <!-- Game code -->
+    <script src="movable.js"></script> 
+    <script src="controls.js"></script> 
+    <script src="crimsonland.js"></script>   
+
+    <!-- This file launches the game -->
+    <script src="../prototype/Loop.js"></script>
+
   </body>  
 </html>  
