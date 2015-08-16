@@ -1,9 +1,0 @@
-function human(neckX, neckY, len, name){
-  this.arm1 = new limb(neckX, neckY, 80, 80, len, standRAWalk, standRAWalk);
-
-  this.alignGenitals = alignGenitals;
-
-  }
-}
-
-
